@@ -1,0 +1,64 @@
+<% layout('/layout/boilerplate') %>
+
+</head>
+<body>
+    <form action="/listing/<%=data._id%>/update?_method=PUT" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
+         <div class="row">
+            <!-- dekho total col 12 me divided rhta hai to inke niche wala div 8 column liya hai jisme sara content hai aur 2 offset matlab left side se 2 column chor ke isiliye ye bich me aa gya content -->
+            <div class="col-8 offset-2">
+        <div class="mb-3" >
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" id="title" required  value="<%=data.title%>">
+              <div class="invalid-feedback">
+        Please choose a valid title
+      </div>
+        </div>
+
+
+        <div  class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" name="description" id="description" cols="30" rows="3" required> <%=data.description%></textarea>
+        </div>
+        <p>Original image</p>
+         <div>
+              <img src="<%=originalimg%>" alt="image">
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">ImageUrl</label>
+            <input type="file" name="image[url]" id="image" class="form-control" value="<%=data.image.url%>">
+              <div class="invalid-feedback">
+        Please choose a valid file.
+      </div>
+        </div>
+<div class="row">
+        <div class="mb-3 col-md-4">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" name="price" id="price" class="form-control" required   value="<%=data.price%>">
+              <div class="invalid-feedback">
+        Please choose a valid price.
+      </div>
+        </div>
+<!-- price and location dono ek hi row me rahega jabtak screensize med rahega uske baad dono diff row me jaega -->
+        <div class="mb-3 col-md-8">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" name="location" id="location" class="form-control" required value="<%=data.location%>" >
+              <div class="invalid-feedback">
+        Please choose a valid location.
+      </div>
+        </div>
+</div>
+        <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" name="country" id="country" class="form-control" required value="<%=data.country%>">
+              <div class="invalid-feedback">
+        Please choose a valid country.
+      </div>
+        </div>
+
+
+        <button class="btn btn-dark mb-3 ">Add</button>
+        </div>
+        </div>
+    </form>
+</body>
+</html>

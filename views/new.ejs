@@ -1,0 +1,64 @@
+<% layout('/layout/boilerplate') %>
+<body>
+  <!-- //YHA PER NOVALIDATE SE SARA DEFAULT VALIDATION HAT JAEGA AUR CLASS "needs-validation" SE CUSTOM VALIDATION HOGA BOOTSTRAP WALA -->
+    <form action="/listing" method="POST" novalidate class="needs-validation" enctype="multipart/form-data"
+    >
+    <!-- enctype jo ham likhe haiusse backemd me file bhi semd kar skte hai -->
+        <div class="row">
+            <!-- dekho total col 12 me divided rhta hai to inke niche wala div 8 column liya hai jisme sara content hai aur 2 offset matlab left side se 2 column chor ke isiliye ye bich me aa gya content -->
+            <div class="col-8 offset-2">
+        <div class="mb-3" >
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" id="title" required>
+             <div class="invalid-feedback">
+        Please choose a valid title
+      </div>
+        </div>
+
+
+        <div  class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" name="description" id="description" cols="30" rows="3" required></textarea>
+        </div>
+
+        <!-- <div class="mb-3">
+            <label for="image" class="form-label">ImageUrl</label>
+            <input type="text" name="image[url]" id="image" class="form-control" >
+        </div> -->
+        <div class="mb-3">
+            <label for="image" class="form-label">upload image</label>
+            <input type="file" name="image[url]" id="image" class="form-control" required  >
+        </div>
+<div class="row">
+        <div class="mb-3 col-md-4">
+            <label for="price" class="form-label">Price</label>
+            <input type="text" name="price" id="price" class="form-control" required>
+             <div class="invalid-feedback">
+        Please write a valid price
+      </div>
+        </div>
+<!-- price and location dono ek hi row me rahega jabtak screensize med rahega uske baad dono diff row me jaega -->
+        <div class="mb-3 col-md-8">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" name="location" id="location" class="form-control" required>
+             <div class="invalid-feedback">
+        Please choose a valid location.
+      </div>
+        </div>
+</div>
+        <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" name="country" id="country" class="form-control" required>
+             <div class="invalid-feedback">
+        Please choose a valid country.
+      </div>
+        </div>
+
+
+        <button class="btn btn-dark mb-3 ">Add</button>
+        </div>
+        </div>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<style>
+  .search-btn{
+    background-color: greenyellow;
+    border-radius: 3rem;
+    border: 1px solid gray;
+    padding: 0 1rem 0 1rem;
+  }
+  .search-btn:hover{
+    background-color: greenyellow;
+    border: 1px solid gray;
+    color: rgb(128, 128, 128);
+
+  }
+  .search-btn i{
+    display: inline;
+    margin-right: 0.5rem;
+  }
+  .search-box{
+   
+    border-radius: 3rem;
+    padding: 0.5rem 3rem 0.5rem 3rem;
+  }
+</style>
+  
+  
+  
+  
+  <nav class="navbar sticky-top navbar-expand-md border-bottom bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><i class="fa-solid fa-compass-drafting"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+
+      <div class="navbar-nav ">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link" href="/listing">Explore</a>
+       
+      </div>
+
+
+<div class="navbar-nav ms-auto"> <form class="d-flex" role="search">
+      <input class="form-control  me-2 search-box" type="search" placeholder="Search destination" aria-label="Search"/>
+      <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+    </form></div>
+        
+
+
+        <!-- ye req.user ek predfine function hai passport ka jo ki user ka details print krata hai jaise loggin krke ek nyi list bnao pta chal jaega console me -->
+         <!-- aur haa ise directly accec nhi kya ja skta ejs me isiliye hmne ek locals bnaya hai currUser naam se hi jo ki index.js me hai  -->
+           <div class="navbar-nav ms-auto">
+               <a class="nav-link" href="/listing/data/new">Add new Place</a>
+    <%  if(currUser){%>
+          <a class="nav-link" href="/logout"><b>Log out</b></a>
+    <%  }else{%>
+     
+
+        <a class="nav-link active" aria-current="page" href="/login"><b>Log in</b></a>
+        <a class="nav-link" href="/signup"><b>SignUp</b></a>
+     <% }%>
+    
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

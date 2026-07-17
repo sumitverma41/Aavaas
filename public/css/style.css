@@ -1,0 +1,175 @@
+/* body */
+body {
+    margin: 0;
+    padding: 0;
+    color: white;
+    background-color: pink;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    /* it makes footer always in bottom */
+    flex: 1;
+}
+
+/* heading+cards */
+.all {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    margin: 0 auto;
+}
+
+/* navbar   */
+.navbar {
+    height: 5rem;
+}
+
+/* footer  */
+.f-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: whitesmoke;
+    padding: 10px;
+}
+
+.fa-compass-drafting {
+    color: greenyellow;
+    font-size: 1.5rem;
+}
+
+.fa-brands {
+    color: black;
+    font-size: 1.5rem;
+    margin: 0 0.1rem;
+}
+
+.f-info-link a {
+    text-decoration: none;
+    color: black;
+
+}
+
+.f-info-link a:hover {
+    text-decoration: underline;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.f-info-social,
+.copy,
+.f-info-link {
+    margin: 0.2rem;
+}
+
+.logo:hover {
+    opacity: 0.5;
+}
+
+
+/*all cards */
+.price {
+    text-align: center;
+}
+
+.rows {
+    width: 80vw !important;
+    margin: 0 auto !important;
+
+    display: flex !important;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+
+.carda {
+    border: none !important;
+    transition: all 0.3s ease-in-out;
+    width: 23rem !important;
+    padding: 0 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.carda:hover {
+    transform: scale(1.05);
+
+}
+
+.card-img-overlay {
+    opacity: 0;
+    background-color: white;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+
+}
+
+.car {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cart {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0 !important;
+    text-align: center !important;
+}
+
+.card-img-top {
+    border-radius: 0.5rem !important;
+    width: 100% !important;
+    height: 20rem !important;
+
+}
+
+.cardb {
+    padding: 3px !important;
+}
+
+.show-link {
+    display: block !important;
+    text-decoration: none;
+
+    color: black;
+}
+
+/* card in show.ejs */
+.incard {
+    margin-top: 2rem;
+
+    /* width: 40vw !important; */
+    justify-self: center !important;
+    border: none !important;
+}
+
+.incard img {
+    width: 100% !important;
+    max-height: 70% !important;
+    border-radius: 0.5rem !important;
+}
+
+.place {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* map */
+#map {
+   height: 60vh;
+ width: 100%;
+}

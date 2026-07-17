@@ -1,0 +1,31 @@
+Authentication ->> Authentication is a process of verifying who someone is
+like that is my owner or this is my owner
+EX- login ,signup
+
+
+
+
+
+Autherisation--> Autherisation is a process of verifying what someone can do
+like that is my owner and he can do this and that only
+like in a website which part they can access to
+
+
+
+
+we use 
+1) npm i passport
+2) npm i passport-local
+and if use mongodb as database then
+3) npm i passport-local-mongoose
+
+
+
+
+
+
+some gadbari = [
+    {
+      g1=>  jab review dalte hai bina login kiye hue to wo login page pe jaate hai and then jab login karte hai to page no found aata hai kyoki hamne ek middleware likha ahi isLogin krke to ye har login rout ka direction change kar ke (jaise hmne review wala form submit kiya to ye uska route leta hai (aisa saveredirectUrl middleware ke wajah se hota hai )) deta hai aur then hmne koi bhi /review/somthing se koi route nhi bnaya hai to page not found aata hai to isko sudharo.
+    }
+]

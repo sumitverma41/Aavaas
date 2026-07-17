@@ -1,0 +1,148 @@
+<% layout('/layout/boilerplate') %>
+</head>
+<body>
+
+  <h3 class="card-title mt-3 col-8 offset-2"><%=data.title%></h3>
+  <div class="row mt-5">
+ <div class="card incard col-8 offset-2 " >
+   
+  <img src="<%=data.image.url%>" class="card-img-top" alt="">
+  <div class="card-body">
+   
+    <p><b>Owned By:-<%=data.owner.username%></b></p>
+    <p class="card-text"><%=data.description%></p>
+    <hr>
+    <p>  &#8377; <%=data.price.toLocaleString("en-IN")%>&#47;night</p>
+    <div class="place">
+        <p class="loca"><%=data.location%></p>
+       <b> <p class="country"><%=data.country%></p></b>
+    </div>
+    <!-- currUser locals me define kiye hai index.js me dekho -->
+   <% if(currUser&&currUser._id.equals(data.owner.id)){%>
+    <!-- equlas ek method hai jo predefine hai -->
+     <!-- aisa krne se ab jo jis card ka owner hai sirf whi   edit and delete kar paega.-->
+    <div class="btns">
+    <a href="/listing/<%=data.id%>/update" class="btn btn-primary ">Edit</a>
+    <form action="/listing/<%=data.id%>?_method=delete" method="POST">
+    <button class="btn btn-dark">Delete</button>
+  </div>
+<%}%>
+ <hr>
+</form>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-6 offset-3">
+  <h4>Leave a Review</h4>
+  <form action="/listing/<%=data.id%>/reviews" method="post" novalidate class="needs-validation">
+    <!-- <div class="mb-3">
+  
+   <input id="rate" type="range" min="1" max="5" name="rating" required class="form-range">
+   </div> -->
+   <div>
+     <label for="rate" class="form-label">Rate</label> 
+    <fieldset class="starability-slot">
+ 
+  <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked aria-label="No rating." />
+  <input type="radio" id="first-rate1" name="rating" value="1" />
+  <label for="first-rate1" title="Terrible">1 star</label>
+  <input type="radio" id="first-rate2" name="rating" value="2" />
+  <label for="first-rate2" title="Not good">2 stars</label>
+  <input type="radio" id="first-rate3" name="rating" value="3" />
+  <label for="first-rate3" title="Average">3 stars</label>
+  <input type="radio" id="first-rate4" name="rating" value="4" />
+  <label for="first-rate4" title="Very good">4 stars</label>
+  <input type="radio" id="first-rate5" name="rating" value="5" />
+  <label for="first-rate5" title="Amazing">5 stars</label>
+</fieldset>
+   </div>
+   <div class="mb-3">
+   <label for="comment" class="form-label">Comment</label>
+   <!-- haem aise name likha hai isse output me sidha ek object jaega reviews naam se jisme saara data rahega.===> agar ham reviews[rating] karenge to  -->
+   <textarea name="comment" id="comment" class="form-control" required></textarea>
+   <div class="invalid-feedback">comment is required.</div>
+  </div>
+  <div class="mb-3">
+  <button class="btn btn-outline-dark" >Submit</button>
+</div>
+</form>
+ <hr>
+
+<%if(data.reviews.length>0){ %>
+  <h4>All Reviews</h4>
+<%}%>
+ <div class="row">
+ <%for(rc of data.reviews){%>
+ <div class="card col-5 mb-4 mb-3 ms-3 " >
+  <div class="card-body">
+   
+    <h6 class="card-subtitle mb-2 text-body-secondary"><b>@<%=rc.author.username%></b></h6>
+    <p class="card-text"><%=rc.comment%></p>
+  <b>Rate:- <%=rc.rating%> star</b>
+  
+  <p class="starability-result" data-rating=<%=rc.rating%>>
+
+  </p>
+  <%if(currUser){%>
+<%if(currUser._id.equals(rc.author.id)){%>
+  <form action="/listing/<%=data.id%>/reviews/<%=rc.id%>?_method=DELETE" method="post"  class="mt-2">
+    <button class="btn btn-sm btn-dark mb-3">Delete</button>
+  </form>
+<%}%>
+<%}%>
+</div>
+</div>
+<%}%>
+
+</div>
+ 
+
+
+
+
+
+
+</div>
+ </div>
+ <hr>
+ <div class="col-6 offset-3">
+  <h3>where you will be</h3>
+ <div id="map">
+<script>
+	let mapToken="<%=process.env.MAP_TOKEN%>"
+  //it does'nt give error we are taking data ka data from router that render show.ejs
+  const list=<%-JSON.stringify(data) %>;
+
+    console.log(list.geometry.coordinates);
+    
+	mapboxgl.accessToken = mapToken;
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style:'mapbox://styles/mapbox/streets-v12',
+        center:list.geometry.coordinates,// starting position [longitude, latitude]. Note that lat must be set between -90 and 90
+        zoom: 9 // starting zoom
+    });
+
+     // Create a default Marker and add it to the map.
+    const marker = new mapboxgl.Marker({color:"red"})
+        .setLngLat(list.geometry.coordinates)
+        .setPopup(new mapboxgl.Popup({offset:25}).setHTML(`<h3>${list.location},${list.country}</h3><p>exact location will provided after Booking!<p>`))
+        .addTo(map);
+
+  // const popup = new mapboxgl.Popup({offset: popupOffsets, className: 'my-class'})
+  //   .setLngLat(e.lngLat)
+  //   .setHTML()
+  //   .setMaxWidth("300px")
+  //   .addTo(map);
+
+  //   new Popup(options:String)
+</script>
+
+ </div>
+</div>
+</body>
+</html>
+
+
+

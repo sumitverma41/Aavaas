@@ -1,0 +1,633 @@
+<% layout("/layout/boilerplate") %>
+
+<style>
+  /* Homepage-only styles: existing project files remain untouched. */
+  .air-start {
+    --ink: #18332d;
+    --muted: #5f706d;
+    --lime: #adff2f;
+    --lime-dark: #adff2f;
+    --cream: #f7f5ef;
+    --line: #dce4df;
+    --shadow: 0 18px 45px rgba(24, 51, 45, 0.12);
+    position: relative;
+    left: 50%;
+    width: 100vw;
+    margin: 0 0 0 -50vw;
+    overflow: hidden;
+    color: var(--ink);
+    background: #fff;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .air-start *,
+  .air-start *::before,
+  .air-start *::after {
+    box-sizing: border-box;
+  }
+
+  .air-start a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .home-shell {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+  }
+
+  .home-hero {
+    position: relative;
+    min-height: 640px;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    padding: 86px 0 172px;
+    color: #fff;
+    background:
+      linear-gradient(90deg, rgba(12, 39, 33, 0.91) 0%, rgba(12, 39, 33, 0.72) 45%, rgba(12, 39, 33, 0.18) 100%),
+      url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=85") center / cover;
+  }
+
+
+  .hero-copy {
+    width: min(675px, 100%);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 1.2rem;
+    color: var(--lime);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow::before {
+    width: 25px;
+    height: 1px;
+    background: currentColor;
+    content: "";
+  }
+
+  .hero-copy h1 {
+    max-width: 660px;
+    margin: 0;
+    font-size: clamp(2.8rem, 6vw, 5.4rem);
+    font-weight: 800;
+    line-height: 0.98;
+    letter-spacing: -0.065em;
+  }
+
+  .hero-copy p {
+    max-width: 525px;
+    margin: 1.45rem 0 0;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: clamp(1rem, 1.5vw, 1.14rem);
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+
+  .home-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 50px;
+    padding: 0.75rem 1.15rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 0.94rem;
+    font-weight: 750;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .home-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .home-btn-primary {
+    color: #18332d !important;
+    background: var(--lime);
+  }
+
+  .home-btn-primary:hover {
+    background: var(--lime-dark);
+  }
+
+  .home-btn-light {
+    color: #fff !important;
+    border-color: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(6px);
+  }
+
+  .home-btn-light:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  .home-search {
+    position: relative;
+    z-index: 2;
+    width: min(1050px, calc(100% - 40px));
+    margin: -74px auto 0;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.68);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: var(--shadow);
+  }
+
+  .search-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr 1fr auto;
+    align-items: stretch;
+  }
+
+  .search-field {
+    min-width: 0;
+    padding: 0.45rem 1.1rem;
+    border-right: 1px solid var(--line);
+  }
+
+  .search-field label {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 0.28rem;
+    color: var(--ink);
+    font-size: 0.76rem;
+    font-weight: 800;
+  }
+
+  .search-field i {
+    color: #6b8c27;
+  }
+
+  .search-field input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--muted);
+    background: transparent;
+    font-size: 0.9rem;
+  }
+
+  .search-field input::placeholder {
+    color: #97a5a1;
+  }
+
+  .search-submit {
+    align-self: center;
+    min-height: 52px;
+    padding: 0.75rem 1.25rem;
+    border: 0;
+    border-radius: 13px;
+    color: var(--ink);
+    background: var(--lime);
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .search-submit:hover {
+    background: var(--lime-dark);
+    transform: translateY(-1px);
+  }
+
+  .home-section {
+    padding: 92px 0;
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-kicker {
+    margin: 0 0 0.55rem;
+    color: #728c36;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .section-heading h2 {
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+  }
+
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 0 0 auto;
+    color: var(--ink) !important;
+    font-size: 0.9rem;
+    font-weight: 800;
+  }
+
+  .text-link i {
+    transition: transform 0.2s ease;
+  }
+
+  .text-link:hover i {
+    transform: translateX(4px);
+  }
+
+  .escape-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr 1fr;
+    grid-auto-rows: 224px;
+    gap: 18px;
+  }
+
+  .escape-card {
+    position: relative;
+    display: flex;
+    align-items: end;
+    min-height: 0;
+    overflow: hidden;
+    border-radius: 20px;
+    color: #fff !important;
+    isolation: isolate;
+  }
+
+  .escape-card:first-child {
+    grid-row: span 2;
+  }
+
+  .escape-card::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, transparent 30%, rgba(9, 28, 23, 0.79) 100%);
+    content: "";
+  }
+
+  .escape-card::after {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    background: var(--image) center / cover;
+    transition: transform 0.45s ease;
+    content: "";
+  }
+
+  .escape-card:hover::after {
+    transform: scale(1.07);
+  }
+
+  .escape-caption {
+    width: 100%;
+    padding: 1.4rem;
+  }
+
+  .escape-caption span {
+    display: block;
+    margin-bottom: 0.2rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.82rem;
+  }
+
+  .escape-caption h3 {
+    margin: 0;
+    font-size: clamp(1.25rem, 2vw, 1.65rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+  }
+
+  .comfort-section {
+    background: var(--cream);
+  }
+
+  .comfort-layout {
+    display: grid;
+    grid-template-columns: 0.92fr 1.08fr;
+    align-items: center;
+    gap: clamp(2rem, 7vw, 6.5rem);
+  }
+
+  .comfort-image {
+    position: relative;
+    min-height: 430px;
+    overflow: hidden;
+    border-radius: 26px;
+    background: url("https://images.unsplash.com/photo-1601918774946-25832a4be0d6?auto=format&fit=crop&w=1100&q=85") center / cover;
+  }
+
+  .comfort-badge {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    max-width: 190px;
+    padding: 1rem;
+    border-radius: 15px;
+    color: var(--ink);
+    background: var(--lime);
+    font-size: 0.83rem;
+    font-weight: 750;
+    line-height: 1.45;
+  }
+
+  .comfort-copy > p:not(.section-kicker) {
+    max-width: 545px;
+    margin: 1rem 0 1.8rem;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .comfort-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 0 0 1.8rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .comfort-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: var(--ink);
+    font-size: 0.91rem;
+    font-weight: 750;
+  }
+
+  .comfort-list i {
+    display: inline-grid;
+    width: 27px;
+    height: 27px;
+    place-items: center;
+    border-radius: 50%;
+    color: #526d12;
+    background: #e7f8b4;
+    font-size: 0.72rem;
+  }
+
+  .hosting-cta {
+    padding: 1.5rem 0 5.5rem;
+    background: var(--cream);
+  }
+
+  .hosting-box {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: clamp(1.7rem, 4vw, 3rem);
+    overflow: hidden;
+    border-radius: 25px;
+    color: #fff;
+    background: #18332d;
+  }
+
+  .hosting-box h2 {
+    max-width: 600px;
+    margin: 0;
+    font-size: clamp(1.65rem, 3vw, 2.35rem);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+  }
+
+  .hosting-box p {
+    max-width: 580px;
+    margin: 0.7rem 0 0;
+    color: rgba(255, 255, 255, 0.71);
+    line-height: 1.6;
+  }
+
+  .hosting-box .home-btn {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 900px) {
+    .search-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem 0;
+    }
+
+    .search-field:nth-child(2) {
+      border-right: 0;
+    }
+
+    .search-field:nth-child(3) {
+      border-top: 1px solid var(--line);
+    }
+
+    .search-submit {
+      margin: 0.55rem 0 0 1rem;
+    }
+
+    .escape-grid {
+      grid-template-columns: 1.15fr 1fr;
+    }
+
+    .escape-card:last-child {
+      grid-column: span 2;
+    }
+
+    .comfort-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .comfort-image {
+      min-height: 330px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .home-shell,
+    .home-search {
+      width: min(100% - 28px, 1180px);
+    }
+
+    .home-hero {
+      min-height: 610px;
+      padding: 72px 0 142px;
+      background-position: 61% center;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(2.65rem, 13vw, 4rem);
+    }
+
+    .home-search {
+      margin-top: -58px;
+      border-radius: 18px;
+    }
+
+    .search-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .search-field,
+    .search-field:nth-child(2),
+    .search-field:nth-child(3) {
+      padding: 0.65rem 0.45rem;
+      border-top: 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .search-submit {
+      width: 100%;
+      margin: 0.65rem 0 0;
+    }
+
+    .home-section {
+      padding: 68px 0;
+    }
+
+    .section-heading {
+      align-items: start;
+      flex-direction: column;
+      margin-bottom: 1.4rem;
+    }
+
+    .escape-grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: 205px;
+    }
+
+    .escape-card:first-child,
+    .escape-card:last-child {
+      grid-column: auto;
+      grid-row: auto;
+    }
+
+    .comfort-list {
+      grid-template-columns: 1fr;
+    }
+
+    .hosting-cta {
+      padding: 0 0 3.5rem;
+    }
+
+    .hosting-box {
+      grid-template-columns: 1fr;
+    }
+
+    .hosting-box .home-btn {
+      justify-self: start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .air-start *,
+    .air-start *::before,
+    .air-start *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<main class="air-start">
+  <section class="home-hero" aria-labelledby="hero-title">
+    <div class="home-shell hero-copy">
+      <span class="eyebrow">Travel your way</span>
+      <h1 id="hero-title">Find a stay that feels like yours.</h1>
+      <p>From quiet mountain cabins to sunlit beach homes, discover memorable places for every kind of journey.</p>
+      <div class="hero-actions">
+        <a class="home-btn home-btn-primary" href="/listing">Explore stays <i class="fa-solid fa-arrow-right"></i></a>
+        <% if (!currUser) { %>
+          <a class="home-btn home-btn-light" href="/signup">Create an account</a>
+        <% } else { %>
+          <a class="home-btn home-btn-light" href="/listing/data/new">List your place</a>
+        <% } %>
+      </div>
+    </div>
+  </section>
+
+  <form class="home-search" action="/listing" method="get" role="search" aria-label="Search stays">
+    <div class="search-grid">
+      <div class="search-field">
+        <label for="destination"><i class="fa-solid fa-location-dot"></i> Where</label>
+        <input id="destination" name="destination" type="search" placeholder="Search destinations">
+      </div>
+      <div class="search-field">
+        <label for="check-in"><i class="fa-regular fa-calendar"></i> Check in</label>
+        <input id="check-in" name="checkIn" type="text" placeholder="Add dates" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+      </div>
+      <div class="search-field">
+        <label for="guests"><i class="fa-solid fa-user-group"></i> Guests</label>
+        <input id="guests" name="guests" type="text" placeholder="Add guests">
+      </div>
+      <button class="search-submit" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+    </div>
+  </form>
+
+  <section class="home-section home-shell" aria-labelledby="escape-title">
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">Make room for wonder</p>
+        <h2 id="escape-title">Pick your perfect escape</h2>
+      </div>
+      <a class="text-link" href="/listing">View all stays <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <div class="escape-grid">
+      <a class="escape-card" href="/listing" style="--image: url('https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1100&q=85');">
+        <div class="escape-caption"><span>Wake up surrounded by nature</span><h3>Forest retreats</h3></div>
+      </a>
+      <a class="escape-card" href="/listing" style="--image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85');">
+        <div class="escape-caption"><span>Slow days, salty air</span><h3>Beach stays</h3></div>
+      </a>
+      <a class="escape-card" href="/listing" style="--image: url('https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?auto=format&fit=crop&w=900&q=85');">
+        <div class="escape-caption"><span>Space to gather</span><h3>Unique homes</h3></div>
+      </a>
+      <a class="escape-card" href="/listing" style="--image: url('https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1100&q=85');">
+        <div class="escape-caption"><span>Unplug and look up</span><h3>Mountain cabins</h3></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="comfort-section">
+    <div class="home-section home-shell comfort-layout">
+      <div class="comfort-image" role="img" aria-label="A bright, comfortable holiday home interior">
+        <div class="comfort-badge"><i class="fa-solid fa-star"></i> Thoughtful stays, memorable moments.</div>
+      </div>
+      <div class="comfort-copy">
+        <p class="section-kicker">Travel without the guesswork</p>
+        <h2>Everything you need for an easy getaway.</h2>
+        <p>Browse places at your own pace, choose a space that suits your plans, and make every trip feel a little more personal.</p>
+        <ul class="comfort-list">
+          <li><i class="fa-solid fa-check"></i> Homes for every mood</li>
+          <li><i class="fa-solid fa-check"></i> Clear, simple browsing</li>
+          <li><i class="fa-solid fa-check"></i> Stays across India</li>
+          <li><i class="fa-solid fa-check"></i> Hosts who welcome you</li>
+        </ul>
+        <a class="home-btn home-btn-primary" href="/listing">Start exploring <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="hosting-cta">
+    <div class="home-shell hosting-box">
+      <div>
+        <h2>Have a place people would love to discover?</h2>
+        <p>Share your home, cabin, or favourite getaway with travellers looking for something special.</p>
+      </div>
+      <a class="home-btn home-btn-primary" href="/listing/data/new">Become a host <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </section>
+</main>
