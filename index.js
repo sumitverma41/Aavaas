@@ -8,7 +8,7 @@ if(process.env.NODE_ENV !="production"){
 const dburl = process.env.ATLASDB_URL
 
 
-console.log(process.env.SECRET);
+
 
 
 
@@ -40,7 +40,7 @@ const { log } = require('console');
 const store = MongoStore.create({
     mongoUrl:dburl,
     crypto:{
-        secret:"mySecretCode"
+        secret:process.env.mySECRET
     },
     touchAfter: 24*60*60 // it should be in second here
 });
@@ -56,7 +56,7 @@ console.log("error in mongo session ",err);
 
 const sessionOption = {
     store:store,
-    secret:"mySecretCode",
+    secret:process.env.mySECRET,
     resave:false,
     saveUninitialized:true,
     cookie:{
